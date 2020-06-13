@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      municipios: [],
+      isLoaded: false,
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://www.el-tiempo.net/api/json/v2/provincias/08/municipios')
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          municipios: result.municipios
+        });
+        console.log(result);
+      });
+  }
+
+  render() {
+    const { municipios, isLoaded } = this.state;
+    if (!isLoaded) {
+      return <div>Loading ... </div>;
+    } else {
+      return (
+        <ul>
+          {municipios.map(municipio => (
+            <li key={municipio.id_rel}>  
+              <h3>{municipio.NOMBRE} </h3>
+              
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  }
 }
 
 export default App;
+
+
+
+
