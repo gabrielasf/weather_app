@@ -1,68 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Esta sencilla interfaz fue desarrollada :cyclone: de acuerdo con las instrucciones :page_facing_up: abajo: 
 
-## Available Scripts
+:paperclip:
+- Crear una aplicación react (usando por ejemplo​ ​https://create-react-app.dev/​);
+- Añadir Elastic UI framework (​https://github.com/elastic/eui/blob/master/wiki/consuming.md​) Crear una página con un buscador que permita seleccionar el municipio. Puedes echar un vistazo al ejemplo de selector asíncrono en la documentación de EUI (https://elastic.github.io/eui/#/forms/combo-box);
+- Mostrar una tarjeta (​https://elastic.github.io/eui/#/display/card​) con el nombre del municipio, la temperatura actual y la probabilidad de lluvia obteniendo la información de la API de el-tiempo.net ;
+- Deberás subir el código a Github o Gitlab;
 
-In the project directory, you can run:
 
-### `yarn start`
+### Tecnologías y recursos utilizados:
+:paperclip:
+- React
+- Elastic UI framework
+- Ael-tiempo.net 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Para iniciar la app :wrench: :
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+En el directorio :open_file_folder: del proyecto : `yarn install` and `yarn start`
+La app estará en [http://localhost:3000](http://localhost:3000) en su browser. 
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
