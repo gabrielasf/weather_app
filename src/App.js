@@ -76,6 +76,9 @@ class App extends React.Component {
             onChange={}
             isClearable={true}
             />
+             <button onClick={this.getWeather}>Submit</button>
+            {this.state.loading && <div>Loading...</div>}
+            {this.state.error && <div>{this.state.error}</div>}
 
             <EuiCard
             textAlign="left"
