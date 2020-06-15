@@ -1,90 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { EuiComboBox, EuiCard } from '@elastic/eui';
 
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      location: "",
       municipios: [],
+      chosenMunicipios: [],
       weather: null,
       error: false
     };
+    this.municipioFromList = this.municipioFromList.bind(this);
+  
   }
 
-  handleInput = event => {
-    this.setState({
-      location: event.target.value
-    });
-  }
-
-  getWeather = () => {
-   this.setState({
-     loading: true,
-     weather: null,
-     error: false
-    });
-
-     fetch("https://www.el-tiempo.net/api/json/v2/provincias/08/municipios")
-      .then((res) => res.json())
-      .then(data => {
+    componentDidMount() {
+    fetch("https://www.el-tiempo.net/api/json/v2/provincias/08/municipios")
+    .then((response) => response.json())
+    .then((data) => {
+      const collectionMunicipios = data.municipios.map((municipio) => {
         return {
-          id: municipio.COD_GEO,
-          codprov: municipio.CODPROV,
-          label: municipio.NOMBRE
-        }
-
-      })
-       
-          this.setState({
-            municipios: data.municipios,
-            loading: false
-          });
-       console.log(data.municipios)
+          id_rel: municipio.ID_REL,
+          codigoine: municipio.CODIGOINE.substring(0,5),
+          label: municipio.NOMBRE,
+          codgeo: municipio.COD_GEO
+        };
       });
-  };
+      this.setState({
+        municipios: collectionMunicipios
+      })
+    });  
+  }
 
+  municipioFromList(item){
+    fetch(`https://www.el-tiempo.net/api/json/v2/provincias/08/municipios/${item[0].codigoine}`)
+      .then((response) => response.json())
+      .then((data) => {
+        
+        this.setState({
+          loading: false,
+          weather: {
+            municipio: data.municipio.NOMBRE,
+            tempActual: data.temperatura_actual,
+            probLluvia: data.lluvia,
+          },
+        })
+        
+      });
+    };
 
   render() {
     return (
       <div>
-        <input
-          type="text"
-          name="location"
-          value={this.state.location}
-          onChange={this.handleInput}
-        />
-        
-        {this.state.loading && <div>Loading...</div>}
-        {this.state.error && <div>{this.state.error}</div>}
-        
-          {municipios.map(municipio => (
-            <li key={municipio.ID_REL}>  
-              <h3>{municipio.NOMBRE}</h3>
-              <h4>{municipio.COD_GEO}</h4>
-          <h4>{this.state.location}</h4>
-            </li>
-          ))}
-
-            <EuiComboBox
-            placeholder="Seleccionar un municipio"
+           <EuiComboBox
+            placeholder="Seleccione un municipio de la provincia de Barcelona"
             singleSelection={{ asPlainText: true }}
             options={this.state.municipios}
-            selectedOptions={}
-            onChange={}
+            selectedOptions={this.state.chosenMunicipios}
+            onChange={this.municipioFromList}
             isClearable={true}
             />
-             <button onClick={this.getWeather}>Submit</button>
-            {this.state.loading && <div>Loading...</div>}
-            {this.state.error && <div>{this.state.error}</div>}
-
+           
+           <div className="result">
+          {this.state.loading && <div>Loading...</div>}
+          {this.state.weather && (
             <EuiCard
-            textAlign="left"
-            title={this.state.weather.municipio}
-            description={`Temperatura actual ${this.state.weather.tempActual}\u00b0 - Probabilidad Lluvia ${this.state.weather.probLluvia}%`}
+              textAlign="left"
+              title={this.state.weather.municipio}
+              description={`Temperatura actual ${this.state.weather.tempActual}\u00b0 - Probabilidad Lluvia ${this.state.weather.probLluvia}%`}
             />
+          )}
+        </div>
         
       </div>
     );
